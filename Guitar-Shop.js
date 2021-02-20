@@ -39,6 +39,7 @@ function ClassicGuitar(manufactureYear = DEF_MAN_YEAR, brand = DEF_BRAND, price 
 
 }
 // לסיים שיטות סטטיות
+    
 // רלוונטי רק לclass 
 
 
