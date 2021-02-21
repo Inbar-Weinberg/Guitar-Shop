@@ -54,25 +54,31 @@ function BassGuitar(manufactureYear = DEF_MAN_YEAR, brand = DEF_BRAND, price = D
         this.used = true;
         return "🔊🔊🔊";
     }
-    this.playSolo = function(){
-        const length = Math.floor(Math.random()*19+1); // random length between 1 to 20 strings long
-        let sounds= ["💥", "🤘", "🎵", "📢", "💢", "🕺"]
-        let solo ='';
-        for (let i=1 ; i<=length ; i++){
-            solo+=sounds[Math.floor(Math.random()*6)];
+    this.playSolo = function () {
+        const length = Math.floor(Math.random() * 19 + 1); // random length between 1 to 20 strings long
+        let sounds = ["💥", "🤘", "🎵", "📢", "💢", "🕺"]
+        let solo = '';
+        for (let i = 1; i <= length; i++) {
+            solo += sounds[Math.floor(Math.random() * 6)];
         }
         return solo;
     }
 }
 
+function ElectricGuitar(manufactureYear = DEF_MAN_YEAR, brand = DEF_BRAND, price = DEF_PRICE, numOfString = DEF_STRINGS, used = DEF_USED, longNeck = DEF_LONG_NECK) {
+    ClassicGuitar.call(this, manufactureYear, brand, price, numOfString, used, longNeck);
+    this.longNeck = (typeof longNeck === 'boolean') ? longNeck : DEF_LONG_NECK;
 
+    ElectricGuitar.prototype = Object.create(ClassicGuitar.prototype);
+    Object.defineProperty(ElectricGuitar.prototype, 'constructor', {
+        value: ElectricGuitar,
+        enumerable: false, // so that it does not appear in 'for in' loop
+        writable: true
+    });
 
-
-
-console.log(ClassicGuitar.detectSound("🔊"));
-//    this.longNeck = (typeof longNeck === 'boolean') ? longNeck : DEF_LONG_NECK;
-// longNeck = DEF_LONG_NECK
-
-let x = new BassGuitar();
-console.log(x.play());
-console.log(x.playSolo())
+    this.play = function () {
+        this.price *= 90 / 100;
+        this.used = true;
+        return "🎸🎸🎸";
+    }
+}
