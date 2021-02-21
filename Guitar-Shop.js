@@ -15,7 +15,6 @@ function isInRange(num, min = 0, max = Infinity) {
     return false;
 }
 
-
 function ClassicGuitar(manufactureYear = DEF_MAN_YEAR, brand = DEF_BRAND, price = DEF_PRICE, numOfString = DEF_STRINGS, used = DEF_USED) {
     this.manufactureYear = (isInRange(manufactureYear, 1900, DEF_MAN_YEAR)) ? manufactureYear : DEF_MAN_YEAR;
     this.brand = (typeof brand === 'string') ? brand : DEF_BRAND;;
@@ -42,10 +41,7 @@ ClassicGuitar.detectSound = function (sound) {
 
 
 function BassGuitar(manufactureYear = DEF_MAN_YEAR, brand = DEF_BRAND, price = DEF_PRICE, numOfString = DEF_STRINGS_BASS, used = DEF_USED) {
-
     ClassicGuitar.call(this, manufactureYear, brand, price, numOfString, used);
-
-
     BassGuitar.prototype = Object.create(ClassicGuitar.prototype);
     Object.defineProperty(BassGuitar.prototype, 'constructor', {
         value: BassGuitar,
@@ -58,7 +54,20 @@ function BassGuitar(manufactureYear = DEF_MAN_YEAR, brand = DEF_BRAND, price = D
         this.used = true;
         return "🔊🔊🔊";
     }
+    this.playSolo = function(){
+        const length = Math.floor(Math.random()*19+1); // random length between 1 to 20 strings long
+        let sounds= ["💥", "🤘", "🎵", "📢", "💢", "🕺"]
+        let solo ='';
+        for (let i=1 ; i<=length ; i++){
+            solo+=sounds[Math.floor(Math.random()*6)];
+        }
+        return solo;
+    }
 }
+
+
+
+
 
 console.log(ClassicGuitar.detectSound("🔊"));
 //    this.longNeck = (typeof longNeck === 'boolean') ? longNeck : DEF_LONG_NECK;
@@ -66,3 +75,4 @@ console.log(ClassicGuitar.detectSound("🔊"));
 
 let x = new BassGuitar();
 console.log(x.play());
+console.log(x.playSolo())
