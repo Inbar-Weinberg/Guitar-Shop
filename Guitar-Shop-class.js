@@ -1,0 +1,3 @@
+
+
+getName(...args){ return... }
